@@ -27,3 +27,4 @@ app.controller("MemController", function($scope, $window, MemFactory, CompFactor
     $window.location.href = `#!/comp/view`;
   };
 });
+
