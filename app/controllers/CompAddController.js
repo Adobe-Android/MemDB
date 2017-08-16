@@ -7,6 +7,7 @@ app.controller("CompAddController", function($scope, $window, CompFactory, UserF
   $scope.comp = {
     name: "",
     description: "",
+    edited: false,
     uid: UserFactory.getUser()
   };
 

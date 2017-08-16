@@ -10,48 +10,56 @@ app.controller("CompController", function($scope, $window, UserFactory, CompFact
       currentUser = UserFactory.getUser();
       fetchComp();
     });
-  
+
   // $scope.searchText = FilterFactory;
 
   // for viewing all computers, deleting a computer, and updating a computer
- function fetchComp() { 
-  $scope.comp = CompFactory.getComp();
-  console.log("comp Obj in CompController", $scope.comp);
-}
 
   // function fetchComp() {
-  //   let compArr = [];
-  //   console.log("Fetch called");
-  //   CompFactory.getCompList(currentUser)
-  //     .then((compList) => {
-  //       console.log("comp Data", compList);
-  //       let compData = compList.data;
-  //       Object.keys(compData).forEach((key) => {
-  //         compData[key].id = key;
-  //         compArr.push(compData[key]);
-  //       });
-  //       $scope.comp = compArr;
-  //     })
-  //     .catch((err) => {
-  //       console.log("error!", err);
-  //     });
+  //   CompFactory.getComp();
+  //   .then((compData) => {
+  //     $scope.compData = compData;
+  //     console.log("compData from getComps", $scope.compData);
+  //   })
+  //   .catch((err) => {
+  //     console.log("error from getComps", err);
+  //   });
+  //   console.log("comp Obj in CompController", $scope.comp);
   // }
+
+  function fetchComp() {
+    let compArr = [];
+    CompFactory.getCompList(currentUser)
+      .then((compList) => {
+        let compData = compList.data;
+        console.log("compData", compData);
+        Object.keys(compData).forEach((key) => {
+          compData[key].id = key;
+          compArr.push(compData[key]);
+        });
+        $scope.comps = compArr;
+      })
+      .catch((err) => {
+        console.log("error", err);
+      });
+    console.log("comp Obj in CompController", $scope.comps);
+  }
 
   $scope.deleteComp = (compId) => {
     console.log("delete called", compId);
-    CompFactory.deleteTodoItem(compId)
+    CompFactory.deleteComp(compId)
       .then((data) => {
-        console.log("removed item", data);
+        console.log("removed part", data);
         fetchComp(currentUser);
       });
   };
 
-  $scope.updateComp = (todoItem) => {
-    console.log("status update");
-    CompFactory.updateTodoStatus()
-      .then((data) => {
-        console.log("Updated status");
-      });
+  $scope.editComp = (comp) => {
+    console.log("comp obj", comp);
+    comp.edited = true;
+    CompFactory.setComp(comp);
+    $window.location.href = "#!/comp/new";
   };
+
 
 });

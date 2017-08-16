@@ -1,17 +1,19 @@
-<div class="row">
-
-  <h1>My Computers</h1>
-
-  <div ng-repeat="comp in compData">
-    <div class="col-sm-4">
-      <div class="card">
-          <div class="card-block">
-            <div class="add"><button class="btn btn-success" ng-click="addMobo(comp.id)"><a ng-href="">Add Mobo</a><i class="fa fa-plus-circle" aria-hidden="true"></i></button></div>
-            <h3 class="card-name">{{comp.name}}</h3>
-            <h4 class="card-description"> {{comp.description}}</h4>
-            <div class="delete"><button class="btn btn-danger" ng-click="deleteMobo(comp.id)"><i class="fa fa-trash" aria-hidden="true"></i></button></div>
-            <div class="viewComp"><button ng-click="viewComp(comp.id)">View this Computer's Motherboard</button></div>
-          </div>
+<div class="col-xs-12">
+  <h1>My Compatible Parts</h1>
+    <div class="row">
+    </div>
+    <div>
+      <div class="panel panel-default" ng-repeat="comp in comps">
+        <div class="panel-body">
+          <div class="col-xs-2 name">Name: {{comp.name}}</div>
+          <div class="col-xs-2 description">Description: {{comp.description}}</div>
+          <div class="col-xs-2 comp-cpu-name">CPU: {{comp.cpu.name}}</div>
+          <div class="col-xs-2 comp-mobo-name">Motherboard: {{comp.mobo.name}}</div>
+          <div class="col-xs-2 comp-mem-name">Memory: {{comp.mem.name}}</div>
+          <div class="col-xs-2 comp-socket">Socket: {{comp.socket}}</div>
+          <div class="col-xs-1 edit"><button class="btn btn-info btn-sm" ng-click="editComp(comp)"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> Edit</button></div>
+          <div class="col-xs-1 delete"><button class="btn btn-danger btn-sm" ng-click="deleteComp(comp.id)"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i> Delete</button></div>
+        </div>
       </div>
     </div>
   </div>
