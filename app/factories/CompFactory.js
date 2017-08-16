@@ -9,13 +9,25 @@ app.factory("CompFactory", function($q, $http, FirebaseUrl, UserFactory) {
     socket: null,
     mobo: null,
     cpu: null,
-    maxRAM: null,
     mem: null,
+    edited: false,
+    id: null,
     uid: UserFactory.getUser()
   };
 
   let getComp = () => {
     return comp;
+  };
+
+  let setComp = (compObj) => {
+    setCompBasics(compObj);
+    setCompSocket(compObj);
+    setCompMobo(compObj);
+    setCompCPU(compObj);
+    setCompMem(compObj);
+    comp.id = compObj.id;
+    comp.edited = compObj.edited;
+    console.log("compID", comp.id);
   };
 
   let setCompBasics = (compObj) => {
@@ -59,27 +71,29 @@ app.factory("CompFactory", function($q, $http, FirebaseUrl, UserFactory) {
     });
   };
 
-  // Located in CompAddController
-  let postNewComp = (newComp) => {
+  // Located in MemController
+  let postNewComp = () => {
     return $q((resolve, reject) => {
       $http.post(`${FirebaseUrl}comps.json`,
-          angular.toJson(newComp))
-        .then((newCompData) => {
-          console.log("compData", newCompData.data);
-          resolve(newCompData.data);
+          angular.toJson(comp))
+        .then((compData) => {
+          console.log("compData", compData);
+          resolve(compData);
         })
         .catch((err) => {
           reject(err);
         });
     });
   };
+  
 
-  let updateComp = (comp) => {
+  let updateComp = () => {
     return $q((resolve, reject) => {
-      let comp_Id = comp.id;
+      let compId = comp.id;
+      console.log("compID", compId);
       // PUT the entire obj to FB
-      if (comp_Id) {
-        $http.put(`${FirebaseUrl}comps/${comp_Id}.json`,
+      if (compId) {
+        $http.put(`${FirebaseUrl}comps/${compId}.json`,
             angular.toJson(comp))
           .then((data) => {
             resolve(data);
@@ -93,11 +107,10 @@ app.factory("CompFactory", function($q, $http, FirebaseUrl, UserFactory) {
     });
   };
 
-  let deleteComp = (comp_Id) => {
-    console.log("userId", comp_Id);
+  let deleteComp = (compId) => {
     return $q((resolve, reject) => {
-      if (comp_Id) {
-        $http.delete(`${FirebaseUrl}comps/${comp_Id}.json`)
+      if (compId) {
+        $http.delete(`${FirebaseUrl}comps/${compId}.json`)
           .then((data) => {
             resolve(data);
           })
@@ -110,9 +123,9 @@ app.factory("CompFactory", function($q, $http, FirebaseUrl, UserFactory) {
     });
   };
 
-  let getSingleComp = (comp_Id) => {
+  let getSingleComp = (comp) => {
     return $q((resolve, reject) => {
-      $http.get(`${FirebaseUrl}comps/${comp_Id}.json`)
+      $http.get(`${FirebaseUrl}comps/${comp}.json`)
         .then((comp) => {
           resolve(comp.data);
         })
@@ -124,6 +137,7 @@ app.factory("CompFactory", function($q, $http, FirebaseUrl, UserFactory) {
 
   // deleteTodoItem, updateTodoStatus, getSingleTodoItem
   return {
+    setComp,
     getCompList,
     postNewComp,
     updateComp,
