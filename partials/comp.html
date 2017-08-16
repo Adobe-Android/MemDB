@@ -5,12 +5,12 @@
     <div>
       <div class="panel panel-default" ng-repeat="comp in comps">
         <div class="panel-body">
-          <div class="col-xs-1 name">Name: {{comp.name}}</div>
-          <div class="col-xs-1 description">Description: {{comp.description}}</div>
-          <div class="col-xs-1 comp-cpu-name">CPU: {{comp.cpu.name}}</div>
-          <div class="col-xs-1 comp-mobo-name">Motherboard: {{comp.mobo.name}}</div>
-          <div class="col-xs-1 comp-mem-name">Memory: {{comp.mem.name}}</div>
-          <div class="col-xs-1 comp-socket">Socket: {{comp.socket}}</div>
+          <div class="col-xs-2 name">Name: {{comp.name}}</div>
+          <div class="col-xs-2 description">Description: {{comp.description}}</div>
+          <div class="col-xs-2 comp-cpu-name">CPU: {{comp.cpu.name}}</div>
+          <div class="col-xs-2 comp-mobo-name">Motherboard: {{comp.mobo.name}}</div>
+          <div class="col-xs-2 comp-mem-name">Memory: {{comp.mem.name}}</div>
+          <div class="col-xs-2 comp-socket">Socket: {{comp.socket}}</div>
           <div class="col-xs-1 edit"><button class="btn btn-info btn-sm" ng-click="editComp(comp)"><i class="glyphicon glyphicon-edit" aria-hidden="true"></i> Edit</button></div>
           <div class="col-xs-1 delete"><button class="btn btn-danger btn-sm" ng-click="deleteComp(comp.id)"><i class="glyphicon glyphicon-trash" aria-hidden="true"></i> Delete</button></div>
         </div>
