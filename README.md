@@ -2,12 +2,7 @@
 A web application to help you choose the right kit of RAM for your system.
 
 ## Future Plans
-Add advanced properties to RAM like more in-depth timings, DRAM manufacturer, and Die type.
-Example: 
-DRAM Manufacturer : Samsung 
-Die Type: (B-Die)
-Advanced Timings: 
-["CL": "16", "RCD": "18", "RP": "18", "RAS": "38", "RC": "56", "CR": "2T", "RFC": "560", "RFC2": "416", "RFC4": "256", "RRDL": "8", "RRDS": "6", "FAW": "39"]
+This project will stick around, but future innovation will likely take place in another form. I plan to build a hardware API (to enable the kind of things I want moving forward) and the front-end for that will likely be a minimal example of its capabilities.
 
 ## Use
 Build the beginnings of a system in the application to make sure you don't waste money on a RAM kit your CPU or Motherboard don't even support.
